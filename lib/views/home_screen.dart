@@ -5,7 +5,7 @@ import '../view_models/sneaker_view_model.dart';
 import 'widgets/sneaker_card.dart';
 
 class HomeScreen extends StatelessWidget {
-  final SneakerController controller = Get.put(SneakerController());
+  final SneakerController controller = Get.find<SneakerController>();
 
   HomeScreen({super.key});
 

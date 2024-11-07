@@ -14,7 +14,7 @@ class SneakerController extends GetxController {
     fetchSneakers();
   }
 
-  void fetchSneakers() async {
+  Future<void> fetchSneakers() async {
     try {
       isLoading(true);
       sneakers.value = await _service.fetchSneakers();
