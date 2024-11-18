@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import '../models/sneaker.dart';
 import '../services/sneaker_service.dart';
 
 class SneakerController extends GetxController {
-  final SneakerService _service = SneakerService();
+  SneakerController(this._service);
+
+  final SneakerService _service;
   var sneakers = <Sneaker>[].obs;
   var cartSneakers = <Sneaker>[].obs;
   var isLoading = true.obs;
@@ -18,6 +22,15 @@ class SneakerController extends GetxController {
     try {
       isLoading(true);
       sneakers.value = await _service.fetchSneakers();
+    } catch (e) {
+      log(e.toString());
+      if (!Get.testMode) {
+        Get.snackbar(
+          'Error',
+          'An error occurred while fetching sneakers.',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } finally {
       isLoading(false);
     }
